@@ -1,10 +1,10 @@
-package com.github.cylleon.banglabankl;
+package com.github.cylleon.banglabank;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BanglaBanklApplicationTests {
+class BanglaBankApplicationTests {
 
 	@Test
 	void contextLoads() {

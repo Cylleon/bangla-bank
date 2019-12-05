@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.cylleon</groupId>
-	<artifactId>bangla-bankl</artifactId>
+	<artifactId>bangla-bank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bangla-bankl</name>
+	<name>bangla-bank</name>
 	<description>University Project</description>
 
 	<properties>
