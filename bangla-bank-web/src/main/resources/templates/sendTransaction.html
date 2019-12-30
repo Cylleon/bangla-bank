@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Transaction</title>
+</head>
+<body>
+    <form action="#" th:action="@{/sendTransaction}" th:object="${transactionForm}" method="post">
+        <p>To: <input type="email" th:field="*{to}"/></p>
+        <p>Amount: <input type="number" step="0.01" th:field="*{amount}"/></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    <div th:if="${error}">
+        <span>Nie bangla :/</span>
+    </div>
+</body>
+</html>

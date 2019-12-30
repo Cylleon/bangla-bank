@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction History</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Amount</th>
+        <th>Recipient</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${sentTransactions.isEmpty()}">
+        <td colspan="3">Nothing to display</td>
+    </tr>
+    <tr th:each="transaction : ${sentTransactions}">
+        <td><span th:text="${transaction.getTimestamp()}">Timestamp</span></td>
+        <td><span th:text="${transaction.getAmount()}">Amount</span></td>
+        <td><span th:text="${transaction.getRecipient().getEmail()}">Recipient</span></td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Amount</th>
+        <th>Sender</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${receivedTransactions.isEmpty()}">
+        <td colspan="3">Nothing to display</td>
+    </tr>
+    <tr th:each="transaction : ${receivedTransactions}">
+        <td><span th:text="${transaction.getTimestamp()}">Timestamp</span></td>
+        <td><span th:text="${transaction.getAmount()}">Amount</span></td>
+        <td><span th:text="${transaction.getSender().getEmail()}">Recipient</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

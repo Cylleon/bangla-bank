@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Bangla Bank</title>
+</head>
+<body>
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">Login</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <button><a th:href="@{/logout}">Logout</a></button>
+        <button><a th:href="@{/transactionHistory}">Transaction History</a></button>
+        <button><a th:href="@{/sendTransaction}">Send Transaction</a></button>
+        <span th:text="${#authentication.getPrincipal().getUser().getEmail()}"></span>
+        <span th:text="${#authentication.getPrincipal().getUser().getBalance()}"></span>
+    </div>
+</body>
+</html>
