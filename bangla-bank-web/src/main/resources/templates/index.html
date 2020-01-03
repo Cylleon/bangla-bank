@@ -6,7 +6,8 @@
 </head>
 <body>
     <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{/login}">Login</a>
+        <button><a th:href="@{/login}">Login</a></button>
+        <button><a th:href="@{/register}">Register</a></button>
     </div>
     <div sec:authorize="isAuthenticated()">
         <button><a th:href="@{/logout}">Logout</a></button>

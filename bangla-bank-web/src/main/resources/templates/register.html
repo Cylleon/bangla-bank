@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form action="#" th:action="@{/register}" modelAttribute="newUser" th:object="${newUser}" method="post">
+    <table>
+        <tr>
+            <td>Email:</td>
+            <td><input type="email" th:field="*{email}"/></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email already in use</td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" th:field="*{password}"/></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password need at least one digit character</td>
+        </tr>
+        <tr>
+            <td>Password Confirm:</td>
+            <td><input type="password" th:field="*{passwordConfirm}"/></td>
+            <td th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}">Passwords don't match</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

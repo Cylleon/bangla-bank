@@ -23,4 +23,8 @@ public class UserService {
         user.setBalance(user.getBalance() + balanceToAdd);
         userRepository.saveAndFlush(user);
     }
+
+    public void registerNewUser(User newUser) {
+        userRepository.saveAndFlush(newUser);
+    }
 }

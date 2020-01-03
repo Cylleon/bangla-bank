@@ -1,8 +1,6 @@
 package com.github.cylleon.banglabank.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +12,8 @@ import java.util.Set;
 @Getter
 @Entity
 @EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -47,7 +47,6 @@ public class User implements Serializable {
     @Setter
     @OneToMany
     private List<Transaction> receivedTransactions;
-    
 
     public User() {
         this.authorities = new HashSet<>();
