@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -44,5 +46,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         user1.setBalance(1.0);
         user1.setAuthorities(Collections.singleton(new Authority(AuthorityType.ROLE_USER)));
         userRepository.save(user1);
+
+        User admin = new User();
+        admin.setEmail("xyz@xyz.com");
+        admin.setPassword(passwordEncoder.encode("123456"));
+        admin.setBalance(0.0);
+        Set<Authority> authoritySet = new HashSet<>();
+        authoritySet.add(new Authority(AuthorityType.ROLE_USER));
+        authoritySet.add(new Authority(AuthorityType.ROLE_ADMIN));
+        admin.setAuthorities(authoritySet);
+        userRepository.saveAndFlush(admin);
     }
 }

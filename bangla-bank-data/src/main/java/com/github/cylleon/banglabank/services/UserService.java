@@ -5,6 +5,9 @@ import com.github.cylleon.banglabank.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -13,6 +16,14 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     public User findUserByEmail(String email) {
@@ -24,7 +35,12 @@ public class UserService {
         userRepository.saveAndFlush(user);
     }
 
-    public void registerNewUser(User newUser) {
-        userRepository.saveAndFlush(newUser);
+    public boolean saveOrUpdateUser(User user) {
+        return userRepository.saveAndFlush(user) != null;
     }
+
+    public void deleteUser(int id) {
+        userRepository.deleteById(id);
+    }
+
 }

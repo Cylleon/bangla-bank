@@ -54,7 +54,10 @@ public class RegisterNewUserController {
               .balance(0.0)
               .authorities(Collections.singleton(new Authority(AuthorityType.ROLE_USER)))
               .build();
-        userService.registerNewUser(newUser);
-        return "redirect:/login";
+        if (userService.saveOrUpdateUser(newUser)) {
+            return "redirect:/login";
+        } else {
+            return "error";
+        }
     }
 }

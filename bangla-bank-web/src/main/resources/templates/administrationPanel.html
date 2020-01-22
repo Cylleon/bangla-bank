@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration Panel</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Balance</th>
+        <th>Password Reset</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${users.isEmpty()}">
+        <td colspan="3">Nothing to display</td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.getEmail()}">Email</span></td>
+        <td><span th:text="${user.getBalance()}">Balance</span></td>
+        <td><button><a th:href="@{/passwordReset/{id}(id=${user.getId()})}">Change Password</a></button></td>
+        <td><button><a th:href="@{/administrationPanel/{id}(id=${user.getId()})}">Delete</a></button></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

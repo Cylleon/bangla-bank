@@ -1,5 +1,6 @@
 package com.github.cylleon.banglabank.model;
 
+import com.github.cylleon.banglabank.model.enums.AuthorityType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,5 +53,13 @@ public class User implements Serializable {
         this.authorities = new HashSet<>();
         this.sentTransactions = new ArrayList<>();
         this.receivedTransactions = new ArrayList<>();
+    }
+
+    public boolean isUserAdmin() {
+        for (Authority authority : authorities) {
+            if (authority.getName() == AuthorityType.ROLE_ADMIN)
+                return true;
+        }
+        return false;
     }
 }

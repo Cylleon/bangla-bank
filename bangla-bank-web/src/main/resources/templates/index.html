@@ -15,6 +15,9 @@
         <button><a th:href="@{/sendTransaction}">Send Transaction</a></button>
         <span th:text="${#authentication.getPrincipal().getUser().getEmail()}"></span>
         <span th:text="${#authentication.getPrincipal().getUser().getBalance()}"></span>
+        <div th:if="${#authentication.getPrincipal().getUser().isUserAdmin()}">
+            <button><a th:href="@{/administrationPanel}">Administration Panel</a> </button>
+        </div>
     </div>
 </body>
 </html>
