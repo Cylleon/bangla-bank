@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -22,6 +23,11 @@ public class BankDeposit {
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REMOVE,
                                                  CascadeType.REFRESH, CascadeType.DETACH})
     private User user;
+
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REMOVE,
+                                                  CascadeType.REFRESH, CascadeType.DETACH})
+    private List<DailyInterest> dailyInterests;
 
     @Setter
     private Double amount;

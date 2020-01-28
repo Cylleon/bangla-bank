@@ -13,6 +13,7 @@
         <button><a th:href="@{/logout}">Logout</a></button>
         <button><a th:href="@{/transactionHistory}">Transaction History</a></button>
         <button><a th:href="@{/sendTransaction}">Send Transaction</a></button>
+        <button><a th:href="@{/bankDeposit}">Deposits</a> </button>
         <span th:text="${#authentication.getPrincipal().getUser().getEmail()}"></span>
         <span th:text="${#authentication.getPrincipal().getUser().getBalance()}"></span>
         <div th:if="${#authentication.getPrincipal().getUser().isUserAdmin()}">

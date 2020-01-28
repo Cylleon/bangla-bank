@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Deposit</title>
+</head>
+<body>
+<form action="#" th:action="@{/bankDeposit}" modelAttribute="bankDeposit" th:object="${bankDeposit}" method="post">
+    <table>
+        <tr>
+            <td>Amount:</td>
+            <td><input type="number" step="0.01" th:field="*{amount}"/></td>
+            <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Insufficiently balance</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Interest</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${dailyInterest.isEmpty()}">
+        <td colspan="3">Nothing to display</td>
+    </tr>
+    <tr th:each="interest : ${dailyInterest}">
+        <td><span th:text="${interest.getTimestamp()}">Timestamp</span></td>
+        <td><span th:text="${interest.getInterest()}">Interest</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
