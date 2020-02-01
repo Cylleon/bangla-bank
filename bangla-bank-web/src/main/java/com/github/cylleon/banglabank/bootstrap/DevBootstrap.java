@@ -38,6 +38,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         user.setPassword(passwordEncoder.encode("123456"));
         user.setBalance(100.0);
         user.setAuthorities(Collections.singleton(new Authority(AuthorityType.ROLE_USER)));
+        user.setActive(true);
         userRepository.save(user);
 
         User user1 = new User();
@@ -45,6 +46,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         user1.setPassword(passwordEncoder.encode("1q2w3e"));
         user1.setBalance(1.0);
         user1.setAuthorities(Collections.singleton(new Authority(AuthorityType.ROLE_USER)));
+        user1.setActive(true);
         userRepository.save(user1);
 
         User admin = new User();
@@ -55,6 +57,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         authoritySet.add(new Authority(AuthorityType.ROLE_USER));
         authoritySet.add(new Authority(AuthorityType.ROLE_ADMIN));
         admin.setAuthorities(authoritySet);
+        admin.setActive(true);
         userRepository.saveAndFlush(admin);
+
+        User unActiveUser = new User();
+        unActiveUser.setEmail("unactive@gmail.com");
+        unActiveUser.setPassword(passwordEncoder.encode("123456"));
+        unActiveUser.setBalance(0.0);
+        unActiveUser.setAuthorities(Collections.singleton(new Authority(AuthorityType.ROLE_USER)));
+        unActiveUser.setActive(false);
+        userRepository.save(unActiveUser);
     }
 }

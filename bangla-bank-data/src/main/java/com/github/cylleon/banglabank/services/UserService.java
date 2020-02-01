@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public void updateUserBalance(User user, Double balanceToAdd) {
-        user.setBalance(user.getBalance() + balanceToAdd);
+        user.setBalance(Math.round((user.getBalance() + balanceToAdd) * 100) / 100.0);
         userRepository.saveAndFlush(user);
     }
 

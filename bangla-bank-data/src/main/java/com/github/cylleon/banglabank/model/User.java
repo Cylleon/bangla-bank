@@ -49,6 +49,9 @@ public class User implements Serializable {
     @OneToMany
     private List<Transaction> receivedTransactions;
 
+    @Setter
+    private boolean isActive;
+
     public User() {
         this.authorities = new HashSet<>();
         this.sentTransactions = new ArrayList<>();

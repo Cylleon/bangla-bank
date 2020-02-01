@@ -1,5 +1,6 @@
 package com.github.cylleon.banglabank.controllers;
 
+import com.github.cylleon.banglabank.model.User;
 import com.github.cylleon.banglabank.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Optional;
 
 
 @Controller
@@ -30,10 +33,29 @@ public class AdministrationPanelController {
         return ADMINISTRATION_PANEL;
     }
 
-    @GetMapping("/administrationPanel/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id);
-        log.info("Deleted user with id - {}", id);
+    @GetMapping("/administrationPanel/deactivate/{id}")
+    public String deactivatedUser(@PathVariable("id") int id) {
+        Optional<User> user = userService.findById(id);
+        if (user.isPresent()) {
+            user.get().setActive(false);
+            log.info("Deactivated user with id - {}", id);
+            userService.saveOrUpdateUser(user.get());
+        } else {
+            log.error("User with id - {} doesn't not exist", id);
+        }
+        return "redirect:/" + ADMINISTRATION_PANEL;
+    }
+
+    @GetMapping("/administrationPanel/activate/{id}")
+    public String activateUser(@PathVariable("id") int id) {
+        Optional<User> user = userService.findById(id);
+        if (user.isPresent()) {
+            user.get().setActive(true);
+            log.info("Activated user with id - {}", id);
+            userService.saveOrUpdateUser(user.get());
+        } else {
+            log.error("User with id - {} doesn't not exist", id);
+        }
         return "redirect:/" + ADMINISTRATION_PANEL;
     }
 }

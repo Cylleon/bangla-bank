@@ -1,5 +1,6 @@
 package com.github.cylleon.banglabank.forms.validators;
 
+import com.github.cylleon.banglabank.model.User;
 import com.github.cylleon.banglabank.services.UserService;
 
 import javax.validation.ConstraintValidator;
@@ -15,7 +16,8 @@ public class ValidRecipientValidator implements ConstraintValidator<ValidRecipie
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return userService.findUserByEmail(email) != null;
+        User recipient = userService.findUserByEmail(email);
+        return recipient != null && recipient.isActive();
     }
 
     @Override

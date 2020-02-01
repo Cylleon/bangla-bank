@@ -40,18 +40,23 @@ public class BankDepositService {
     public void calculateDailyInterest() {
         List<BankDeposit> updatedDeposit = new ArrayList<>();
         List<DailyInterest> dailyInterests = new ArrayList<>();
-        bankDepositRepository.findAll().forEach(bankDeposit -> {
-            double interest = Math.round((bankDeposit.getAmount() * DAILY_INTEREST_RATE) * 100) / 100.0;
-            DailyInterest dailyInterest = DailyInterest.builder()
-                  .bankDeposit(bankDeposit)
-                  .interest(interest)
-                  .timestamp(Instant.now())
-                  .build();
-            bankDeposit.setAmount(bankDeposit.getAmount() + dailyInterest.getInterest());
-            log.debug("Updated bank deposit {} by amount {}", bankDeposit, dailyInterest);
-            updatedDeposit.add(bankDeposit);
-            dailyInterests.add(dailyInterest);
-        });
+        bankDepositRepository.findAll().stream()
+              .filter(bankDeposit -> {
+                  Optional<User> user = userService.findById(bankDeposit.getId());
+                  return user.isPresent() && user.get().isActive();
+              })
+              .forEach(bankDeposit -> {
+                  double interest = Math.round((bankDeposit.getAmount() * DAILY_INTEREST_RATE) * 100) / 100.0;
+                  DailyInterest dailyInterest = DailyInterest.builder()
+                        .bankDeposit(bankDeposit)
+                        .interest(interest)
+                        .timestamp(Instant.now())
+                        .build();
+                  bankDeposit.setAmount(bankDeposit.getAmount() + dailyInterest.getInterest());
+                  log.debug("Updated bank deposit {} by amount {}", bankDeposit, dailyInterest);
+                  updatedDeposit.add(bankDeposit);
+                  dailyInterests.add(dailyInterest);
+              });
         bankDepositRepository.saveAll(updatedDeposit);
         bankDepositRepository.flush();
         dailyInterestRepository.saveAll(dailyInterests);
