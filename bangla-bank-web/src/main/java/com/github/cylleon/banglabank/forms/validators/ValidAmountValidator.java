@@ -25,7 +25,7 @@ public class ValidAmountValidator implements ConstraintValidator<ValidAmount, Do
             return false;
         }
         User user = userService.findUserByEmail(((BankUserDetails)authentication.getPrincipal()).getUser().getEmail());
-        return user.getBalance() >= amount;
+        return user.getBalance() >= amount && amount > 0;
     }
 
     @Override

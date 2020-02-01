@@ -29,6 +29,9 @@ public class ValidBankDepositAmountValidator implements ConstraintValidator<Vali
         if (authentication.getPrincipal() == null) {
             return false;
         }
+        if (amount < 0) {
+            return false;
+        }
         User user = userService.findUserByEmail(((BankUserDetails)authentication.getPrincipal()).getUser().getEmail());
         Optional<BankDeposit> bankDeposit = bankDepositService.getBankDepositByUserId(user.getId());
         if (bankDeposit.isPresent()) {
