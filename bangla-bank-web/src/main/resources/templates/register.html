@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" href="../static/css/layout.css" th:href="@{/css/Layout.css}">
 </head>
 <body>
 <form action="#" th:action="@{/register}" modelAttribute="newUser" th:object="${newUser}" method="post">
@@ -15,17 +16,20 @@
         <tr>
             <td>Password:</td>
             <td><input type="password" th:field="*{password}"/></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password need at least one digit character</td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password need at least one digit
+                character
+            </td>
         </tr>
         <tr>
             <td>Password Confirm:</td>
             <td><input type="password" th:field="*{passwordConfirm}"/></td>
-            <td th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}">Passwords don't match</td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
+            <td th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}">Passwords don't
+                match
+            </td>
         </tr>
     </table>
+    <br>
+    <button type="submit" class="submitButton">Submit</button>
 </form>
 </body>
 </html>

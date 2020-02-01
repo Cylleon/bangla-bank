@@ -57,6 +57,7 @@ public class BankDepositController {
         ModelAndView modelAndView = new ModelAndView("bankDeposit");
         modelAndView.addObject("bankDeposit", bankDepositForm);
         if (result.hasErrors()) {
+            modelAndView.addObject("dailyInterest", bankDepositService.getDailyInterestByUserId(user.getId()));
             log.debug("Creating new bank deposit errors {}", result.getAllErrors());
             return modelAndView;
         }

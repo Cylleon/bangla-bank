@@ -1,0 +1,62 @@
+body {
+    margin-top: 29px;
+    background-color: #414141;
+}
+
+button {
+    background-color: #546790;
+    color: #c3c9bf;
+    padding: 10px;
+    font-size: 18px;
+    font-family: "Arial";
+    text-align: center;
+    cursor: pointer;
+    width: 250px;
+    border: solid 3px #435680;
+    text-decoration: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #c3c9bf;
+    width: fit-content;
+    height: fit-content;
+}
+
+button:hover {
+    background-color: #435680;
+    border: solid 3px #324570;
+}
+
+span {
+    color: #c3c9bf;
+    font-size: 18px;
+    text-align: center;
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+table td, table th {
+    color: #c3c9bf;
+    font-size: 18px;
+}
+
+.submitButton {
+    margin-right: auto;
+    margin-left: auto;
+    width: 250px;
+    display: block;
+}
+
+.topRight {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
