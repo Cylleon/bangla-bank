@@ -65,7 +65,8 @@ public class BankDepositController {
               .timestamp(Instant.now())
               .build();
         if (bankDeposit.isPresent()) {
-            Double depositedAmount = bankDepositForm.getAmount() - bankDeposit.get().getAmount();
+            Double depositedAmount =
+                  Math.round((bankDepositForm.getAmount() - bankDeposit.get().getAmount()) * 100) / 100.0;
             bankDeposit.get().setAmount(bankDeposit.get().getAmount() + depositedAmount);
             user.setBalance(user.getBalance() - depositedAmount);
             dailyInterest.setInterest(depositedAmount);
